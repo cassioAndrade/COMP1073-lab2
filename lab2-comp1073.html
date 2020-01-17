@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Lab 2 | COMP1073 Client-Side JavaScript</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+	<h1>Airports</h1>
+    <table class="table">
+        <thead class="thead-dark">
+         <tr>
+            <th scope="col">code</th>
+            <th scope="col">Airport</th>
+         </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">PEK</th>
+            <td>Beijing Capital International</td>
+        </tr>
+        <tr>
+            <th scope="row">JFK</th>
+            <td>John F Kennedy International</td>
+        </tr>
+        <tr>
+            <th scope="row">YYZ</th>
+            <td>Lester B. Pearson International</td>
+        </tr>
+        <tr>
+            <th scope="row">LHR</th>
+            <td>London Heathrow</td>
+        </tr>
+        <tr>
+            <th scope="row">HND</th>
+            <td>Tokyo Haneda International</td>
+        </tr>
+        </tbody>
+    </table>
+
+</body>
+<script>
+    var airportList = document.querySelectorAll('tbody tr th');
+    // querySelectorAll returns a list of all matching header cells
+    
+    var airports = ['Beijing Capital International, https://goo.gl/maps/iPe5fAqzq8C2 PEK',
+                    'John F Kennedy International, https://goo.gl/maps/JWwABmA3MBS2 JFK',
+                    'Lester B. Pearson International, https://goo.gl/maps/Ypu1dJLsnQu YYZ',
+                    'London Heathrow, https://goo.gl/maps/TFx8SrATdYr LHR',
+                    'Tokyo Haneda International, https://goo.gl/maps/5UxH2TxbRtT2 HND'];
+
+    for(var i = 0; i < airports.length; i++) {
+        var input = airports[i];
+        // Put your code here inside this loop
+        
+        let commaIndex = input.indexOf(',');
+        // extract the full name of the airport 
+        let airportName = input.slice(0, commaIndex);
+        // extract the airport code
+        let airportCode = input.slice(-3);
+        // extract the airport url
+        let airportUrl = input.slice(commaIndex + 1, -3 ).trim();
+        // create a validaded, escaped hyperlink
+        var hyperlink = document.createElement('a');
+        // set the text of the hyperlink that we are building
+        hyperlink.innerHTML = airportCode;
+        // set the href attribute of the a tag
+        hyperlink.setAttribute('href', airportUrl);
+        // set the cell content to the HTML of the hyperlink
+        airportList[i].innerHTML = hyperlink.outerHTML;
+        
+    }
+</script>
+</html>
